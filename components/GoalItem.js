@@ -1,12 +1,14 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Pressable } from 'react-native';
 
-function GoalItem (prop) {
+function GoalItem (props) {
   return(
-    <View style={styles.listItemContainer}>
-      <Text style={styles.listItem}>
-        {prop.goalObject.item}
-      </Text>
-    </View>
+    <Pressable onPress={props.deleteItem.bind(this, props.goalObject.item.id)} style={({pressed}) => pressed && styles.pressedItem}>
+      <View style={styles.listItemContainer}>
+        <Text style={styles.listItem}>
+          {props.goalObject.item.text}
+        </Text>
+      </View>
+    </Pressable>
   )
 };
 
@@ -16,11 +18,15 @@ const styles = StyleSheet.create({
   listItemContainer: {
     marginVertical: 5,
     padding: 20,
-    backgroundColor: 'purple',
+    backgroundColor: '#b180f0',
     borderRadius: 15
+  },
+  pressedItem: {
+    opacity: 0.5
   },
   listItem: {
     color: 'white',
     fontWeight: '700',
+    fontSize: 18
   }
 });
